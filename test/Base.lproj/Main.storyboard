@@ -74,6 +74,41 @@
             </objects>
             <point key="canvasLocation" x="1212" y="1403"/>
         </scene>
+        <!--Root View Controller-->
+        <scene sceneID="lYn-a7-y02">
+            <objects>
+                <tableViewController storyboardIdentifier="DetailModalTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="W17-mP-9Cb" customClass="DetailModalTableViewController" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="HAt-X7-NzD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="W17-mP-9Cb" id="qPe-b7-4KB"/>
+                            <outlet property="delegate" destination="W17-mP-9Cb" id="EmY-ZK-1Lx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="88y-6V-4CM"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R2a-PR-7Oy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1212" y="2110"/>
+        </scene>
+        <!--Detail Modal Nav View Controller-->
+        <scene sceneID="gHk-29-5N7">
+            <objects>
+                <navigationController storyboardIdentifier="DetailModalNavViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="erz-gD-XgV" customClass="DetailModalNavViewController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9FV-a8-qbH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="W17-mP-9Cb" kind="relationship" relationship="rootViewController" id="yvT-gh-wxQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jNp-Eb-aaA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="474" y="2105"/>
+        </scene>
         <!--Detail View Controller-->
         <scene sceneID="ChA-ze-fvq">
             <objects>

@@ -10,8 +10,7 @@ import UIKit
 
 class TestTableViewController: UITableViewController {
     
-    var ar : [Any]! = ["1","2","3","4"];
-    var ar2 : [Any]! = ["777","777","7777","777"];
+    var dic = ["key1":["1","2","3","4"],"key2":["111","2222","3333","4444"]];
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +22,11 @@ class TestTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.title = "테이블"
-        
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SUNHO");
+        
+        let arTmp = dic["key1"];
+        print(arTmp);
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -40,17 +42,19 @@ class TestTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 2
+        return dic.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         if(section == 1){
-            return ar2.count;
+            let arTmp = dic["key2"];
+            return (arTmp?.count)!;
         }
         
-        return ar.count;
+        let arTmp = dic["key1"];
+        return (arTmp?.count)!;
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -58,9 +62,11 @@ class TestTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("SUNHO", forIndexPath: indexPath)
 
         if(indexPath.section == 1){
-            cell.textLabel?.text = ar2[indexPath.row] as? String
+            let arTmp : [String] = dic["key2"]!;
+            cell.textLabel?.text = arTmp[indexPath.row]
         }else {
-            cell.textLabel?.text = ar[indexPath.row] as? String
+            let arTmp : [String] = dic["key1"]!;
+            cell.textLabel?.text = arTmp[indexPath.row]
         }
             
         return cell
@@ -120,19 +126,31 @@ class TestTableViewController: UITableViewController {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true);
         
-        //상세페이지로 이동
-        let story = UIStoryboard(name: "Main", bundle: nil);
-        let detailViewController = story.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController;
-        //detailViewController.title = ar[indexPath.row] as? String;
-       
-        if(indexPath.section == 1){
-            detailViewController.str =  ar2[indexPath.row] as? String;
-        }else {
-            detailViewController.str =  ar[indexPath.row] as? String;
-        }
         
-        self.navigationController?.pushViewController(detailViewController, animated: true);
+        if(indexPath.section == 1){
+        
+            //모달 modal
+            //var arTmp : [String] = dic["key2"]!;
+            let story = UIStoryboard(name: "Main", bundle: nil);
+            
+            let testNavViewController = story.instantiateViewControllerWithIdentifier("DetailModalNavViewController") as! UINavigationController;
+            //testNavViewController.modalTransitionStyle = UIModalTransitionStyle.PartialCurl;
+            self.presentViewController(testNavViewController, animated: true, completion: { () -> Void in
+            })
+            
+        }else {
+            
+            //상세페이지로 이동
+            let story = UIStoryboard(name: "Main", bundle: nil);
+            let detailViewController = story.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController;
+            //detailViewController.title = ar[indexPath.row] as? String;
+            
+            var arTmp : [String] = dic["key1"]!;
+            detailViewController.str =  arTmp[indexPath.row]
+            
+            self.navigationController?.pushViewController(detailViewController, animated: true);
 
+        }
         
     }
 
